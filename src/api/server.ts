@@ -1,7 +1,7 @@
 import fastify, { FastifyInstance, FastifyLoggerOptions } from 'fastify';
 import { serializerCompiler, validatorCompiler, ZodTypeProvider } from 'fastify-type-provider-zod';
 import { PinoLoggerOptions } from 'fastify/types/logger.js';
-import { errorHandler } from '#/api/error-handler.js';
+import { errorHandler, notFoundHandler } from '#/api/error-handler.js';
 import { router } from '#/api/router.js';
 
 export function getServer(): FastifyInstance {
@@ -17,6 +17,7 @@ export function getServer(): FastifyInstance {
     .setSerializerCompiler(serializerCompiler)
     .withTypeProvider<ZodTypeProvider>()
     .setErrorHandler(errorHandler)
+    .setNotFoundHandler(notFoundHandler)
     .register(router);
 
   return server;

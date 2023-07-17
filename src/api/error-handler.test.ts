@@ -1,7 +1,7 @@
 import { expect, test, vi } from 'vitest';
 import { ZodError, ZodIssueCode } from 'zod';
 import { InternalServerError } from '#/api/custom-errors.js';
-import { errorHandler } from '#/api/error-handler.js';
+import { errorHandler, notFoundHandler } from '#/api/error-handler.js';
 
 test('handles zod error', () => {
   const error = new ZodError([
@@ -55,5 +55,20 @@ test('handles unknown error', () => {
     error: 'Internal Server Error',
     code: 'INTERNAL_SERVER_ERROR',
     message: 'unknown error',
+  });
+});
+
+test('handles not found error', () => {
+  const request = { method: 'GET', url: '/' } as any;
+  const reply = { status: vi.fn().mockReturnThis(), send: vi.fn() } as any;
+
+  notFoundHandler(request, reply);
+
+  expect(reply.status).toHaveBeenCalledWith(404);
+  expect(reply.send).toHaveBeenCalledWith({
+    statusCode: 404,
+    error: 'Not Found',
+    code: 'NOT_FOUND',
+    message: 'path GET:/ not found',
   });
 });

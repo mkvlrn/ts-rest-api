@@ -20,3 +20,14 @@ export function errorHandler(error: Error, _request: FastifyRequest, reply: Fast
     });
   }
 }
+
+export function notFoundHandler(request: FastifyRequest, reply: FastifyReply) {
+  const { method, url } = request;
+
+  reply.status(404).send({
+    statusCode: 404,
+    error: STATUS_CODES[404],
+    code: 'NOT_FOUND',
+    message: `path ${method}:${url} not found`,
+  });
+}
