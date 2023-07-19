@@ -25,3 +25,12 @@ model Task {
 
   @@map("tasks")
 }
+
+model Session {
+  sid    String   @id
+  sess   Json     @db.Json
+  expire DateTime @db.Timestamp(6)
+
+  @@index([expire], name: "IDX_session_expire")
+  @@map("sessions")
+}

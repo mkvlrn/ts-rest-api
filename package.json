@@ -9,7 +9,7 @@
   "scripts": {
     "build": "yarn tsc -p tsconfig.build.json",
     "postbuild": "yarn tsc-alias -p tsconfig.build.json",
-    "check-types": "yarn tsc-files",
+    "check-types": "yarn tsc-files src/types/environment.d.ts src/types/fastify.d.ts",
     "dev": "yarn tsx watch --ignore **/*.test.ts -r dotenv/config src/index.ts",
     "format": "yarn prettier --write",
     "lint": "yarn eslint --fix",
@@ -27,6 +27,7 @@
     "@mkvlrn/prettier-config": "^23.7.0",
     "@mkvlrn/tsconfig": "^23.7.1",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "@types/connect-pg-simple": "^7.0.0",
     "@types/node": "^20.4.2",
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@typescript-eslint/parser": "^6.1.0",
@@ -81,8 +82,12 @@
     ]
   },
   "dependencies": {
+    "@fastify/cookie": "^8.3.0",
     "@fastify/error": "^3.3.0",
+    "@fastify/session": "^10.4.0",
     "@prisma/client": "^5.0.0",
+    "argon2": "^0.30.3",
+    "connect-pg-simple": "^9.0.0",
     "dotenv": "^16.3.1",
     "fastify": "^4.20.0",
     "fastify-type-provider-zod": "^1.1.9",
