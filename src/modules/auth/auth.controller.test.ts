@@ -44,6 +44,8 @@ test('signInHandler', async () => {
 });
 
 test('signOutHandler', async () => {
+  vi.stubEnv('SESSION_NAME', 'session');
+
   await signOutHandler(REQUEST, REPLY);
 
   expect(REQUEST.session.destroy).toHaveBeenCalled();

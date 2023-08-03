@@ -67,7 +67,7 @@
   "prettier": "@mkvlrn/prettier-config",
   "lint-staged": {
     "*.(ts|tsx)": [
-      "yarn check-types src/types/environment.d.ts",
+      "yarn check-types",
       "yarn lint",
       "yarn format",
       "yarn test-staged"

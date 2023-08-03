@@ -32,13 +32,14 @@ export async function signInHandler(request: FastifyRequest<SignInRequest>, repl
 }
 
 export async function signOutHandler(request: FastifyRequest, reply: FastifyReply) {
+  const { SESSION_NAME } = process.env;
   await request.session.destroy();
 
-  reply.status(204).clearCookie('session', { path: '/' }).send();
+  reply.status(204).clearCookie(SESSION_NAME, { path: '/' }).send();
 }
 
 export async function whoamiHandler(request: FastifyRequest, reply: FastifyReply) {
-  const id = request.session.user?.id;
+  const { id } = request.session.user!;
 
   const user = await prisma.user.findUnique({ where: { id } });
   if (!user) throw new UnauthorizedError();
