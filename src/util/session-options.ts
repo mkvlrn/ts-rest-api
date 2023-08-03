@@ -14,6 +14,7 @@ export const sessionOptions: FastifySessionOptions = {
   secret: SESSION_SECRET,
   cookieName: SESSION_NAME,
   saveUninitialized: false,
+  rolling: false,
   cookie: {
     httpOnly: true,
     path: '/',
