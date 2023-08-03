@@ -1,6 +1,5 @@
 import { FastifySessionObject } from '@fastify/session';
 import { User } from '@prisma/client';
-import 'fastify';
 
 declare module 'fastify' {
   interface FastifyRequest {
