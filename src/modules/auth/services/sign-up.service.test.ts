@@ -19,6 +19,7 @@ test('creates user successfully', async () => {
 
 test('throws AuthSignInEmailAlreadyInUseError when email is already in use', async () => {
   vi.spyOn(prisma.user, 'findUnique').mockResolvedValue({} as any);
+
   const act = signUpService(EMAIL, PASSWORD);
 
   await expect(act).rejects.toThrow(`email ${EMAIL} already in use`);
